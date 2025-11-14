@@ -6,11 +6,11 @@ template <typename T>
 class LinkedList {
 
 	struct Node{
-		T info;
+		T data;
 		Node* prev;
 		Node* next;
-		Node(T info, Node* prev, Node* next)
-		:info(info), prev(prev), next(next){}
+		Node(T data, Node* prev, Node* next)
+		:data(data), prev(prev), next(next){}
 	};
 
 	// Stores pointers to first and last nodes and count
@@ -23,7 +23,7 @@ public:
 	void printForward() const{
 		Node* temp = head;
 		while(temp != nullptr){
-			std::cout<<temp->info << std::endl;
+			std::cout<<temp->data << std::endl;
 			temp = temp->next;
 		}
 
@@ -32,7 +32,7 @@ public:
 
 		Node* temp = tail;
 		while(temp != nullptr){
-			std::cout<<temp->info << std::endl;
+			std::cout<<temp->data << std::endl;
 			temp = temp->prev;
 		}
 
@@ -157,7 +157,7 @@ public:
     	clear();
 		Node* temp = rhs.head;
     	while(temp != nullptr){
-			addTail(temp->info);
+			addTail(temp->data);
 			temp = temp->next;
 		}
 
@@ -182,7 +182,7 @@ public:
 		Node* temp = list.head;
 
 		while(temp != nullptr){
-		addTail(temp->info);
+		addTail(temp->data);
 		temp = temp->next;
 		}
 			
