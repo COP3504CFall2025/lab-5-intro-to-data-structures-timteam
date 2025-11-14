@@ -18,19 +18,46 @@ public:
     LLDQ() = default;
 
     // Core Insertion Operations
-    void pushFront(const T& item) override;
-    void pushBack(const T& item) override;
+    void pushFront(const T& item) override{
+        list.addHead(item);
+    }
+
+    void pushBack(const T& item) override{
+        list.addTail(item);
+    }
 
     // Core Removal Operations
-    T popFront() override;
-    T popBack() override;
+    T popFront() override{
+        if(list.getHead() == nullptr){
+            throw std::runtime_error("Empty");
+        }
+        
+        T value = list.getHead()->data;
+        list.removeHead();
+        return value;
+    }
+    T popBack() override{
+        if(list.getHead() == nullptr){
+            throw std::runtime_error("Empty");
+        }
+        
+        T value = list.getTail()->data;
+        list.removeTail();
+        return value;
+    }
 
     // Element Accessors
-    const T& front() const override;
-    const T& back() const override;
+    const T& front() const override{
+        return list.getHead()->data;
+    }
+    const T& back() const override{
+        return list.getTalk()->data;
+    }
 
     // Getter
-    std::size_t getSize() const noexcept override;
+    std::size_t getSize() const noexcept override{
+        return list.getCount();
+    }
 };
 
 
