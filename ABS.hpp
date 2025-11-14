@@ -76,7 +76,7 @@ public:
 		//Cited from Dynamic array lab
 	}
 
-    ~ABS() noexcept override{
+    ~ABS() noexcept{
 	delete[] arr;
 	};
 

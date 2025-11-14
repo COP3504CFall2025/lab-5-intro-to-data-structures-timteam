@@ -69,7 +69,7 @@ public:
     }
 
     ~ABQ() noexcept override {
-
+    delete[] array;
     }
 
     // Getters
