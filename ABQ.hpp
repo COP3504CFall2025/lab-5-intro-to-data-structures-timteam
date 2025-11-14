@@ -68,7 +68,7 @@ public:
         return *this;
     }
 
-    ~ABQ() noexcept override {
+    ~ABQ() noexcept {
     delete[] array;
     }
 
