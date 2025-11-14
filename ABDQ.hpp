@@ -88,6 +88,7 @@ public:
 
             delete[] array;
             array = newArr;
+            newArr = nullptr;
             capacity = newCap;
         }
 
@@ -112,6 +113,7 @@ public:
 
         delete[] array;
         array = newArr;
+        newArr = nullptr;
         capacity = newCap;
     }
 
