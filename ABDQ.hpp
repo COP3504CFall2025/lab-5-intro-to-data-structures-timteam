@@ -81,7 +81,7 @@ public:
        return *this;
    }
 
-   ~ABDQ() noexcept override {
+   ~ABDQ() override {
    delete[] array;
    array = nullptr;
     capacity = 0;
