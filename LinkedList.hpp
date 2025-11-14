@@ -2,10 +2,22 @@
 #include <iostream>
 using namespace std;
 
-
-
 template <typename T>
 class LinkedList {
+
+	struct Node{
+		T info;
+		Node* prev;
+		Node* next;
+		Node(T info, Node* prev, Node* next)
+		:info(info), prev(prev), next(next){}
+	};
+
+	// Stores pointers to first and last nodes and count
+	Node* head;
+	Node* tail;
+	unsigned int count;
+
 public:
 	// Behaviors
 	void printForward() const{
@@ -163,11 +175,29 @@ public:
 	}
 
 	LinkedList(const LinkedList<T>& list){
+		head = nullptr;
+		tail = nullptr;
+		count = 0;
+
+		Node* temp = list.head;
+
+		while(temp != nullptr){
+		addTail(temp->info);
+		temp = temp->next;
+		}
+			
 		//intialize head and tail before you addTail/addHead
 	}
 	LinkedList(LinkedList<T>&& other) noexcept{
-		
+		head = other.head;
+		tail = other.tail;
+		count = other.count;
+
+		other.head = nullptr;
+		other.tail = nullptr;
+		other.count = 0;
 	}
+
 	~LinkedList(){
 		clear();
 		head = nullptr;
@@ -175,20 +205,6 @@ public:
 		count = 0;
 	}
 
-private:
-
-	struct Node{
-		T info;
-		Node* prev;
-		Node* next;
-		Node(T info, Node* prev, Node* next)
-		:info(info), prev(prev), next(next){}
-	}
-
-	// Stores pointers to first and last nodes and count
-	Node* head;
-	Node* tail;
-	unsigned int count;
 
 };
 
