@@ -121,7 +121,7 @@ public:
         }
         currsize--;
 
-        if(currsize > 0 && currsize < capacity / 4 && capacity > 1) {
+        if(currsize <= capacity / 4 ) {
             size_t newCap = capacity / 2;
             if(newCap < 1){
             newCap = 1;

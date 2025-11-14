@@ -123,11 +123,15 @@ public:
 	}
 
     T pop() override{
-	if(currsize > 0){
+	if(currsize == 0){
+    throw std::runtime_error("Empty array");
+    }
+
 	currsize--;
+
 	T value = arr[currsize];
 
-		if(currsize > 0 && currsize < capacity / 4 && capacity > 1){
+		if(currsize <= capacity / 4){
             size_t newCap = capacity / 2;
             if(newCap < 1){
              newCap = 1;
@@ -146,8 +150,7 @@ public:
 
 		return value;
 	}
-	throw std::runtime_error("Empty array");
-	}
+
 
 
 };
