@@ -25,6 +25,7 @@ class QueueInterface {
 
 template <typename T>
 class DequeInterface {
+    virtual ~DequeInterface() = default;
     virtual void pushFront(const T& item) = 0;
     virtual void pushBack(const T& item) = 0;
     virtual T popFront() = 0;
