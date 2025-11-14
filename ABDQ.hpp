@@ -19,10 +19,22 @@ private:
 public:
     // Big 5
     ABDQ()
-    : capacity(1), currsize(0), array(new T[capacity]), frontt(0),backk(1){}
+    {
+        capacity = 1;
+        currsize = 0;
+        frontt = 0;
+        array = new T[capacity];
+        backk = 0;
+    }
 
     explicit ABDQ(std::size_t capacity)
-    : capacity(capacity), currsize(0),  array(new T[capacity]),frontt(0), backk(currsize-1){}
+    {
+        capacity = capacity;
+        currsize = 0;
+        frontt = 0;
+        array = new T[capacity];
+        backk = 0;
+    }
 
    ABDQ(const ABDQ& other)
    {
@@ -41,11 +53,11 @@ public:
    if(this == &rhs){
         return *this;
        }
-       delete[] array;
        capacity = rhs.capacity;
        currsize = rhs.currsize;
        frontt = rhs.frontt;
        backk = rhs.backk;
+       delete[] array;
        array = new T[rhs.capacity];
        for(size_t i = 0; i < currsize; i++) {
            array[i] = rhs.array[i];
@@ -55,7 +67,13 @@ public:
    }
 
    ABDQ(ABDQ&& other) noexcept
-       :capacity(other.capacity), currsize(other.currsize), array(other.array) {
+    {
+       capacity = other.capacity;
+       currsize = other.currsize;
+       frontt = other.frontt;
+       backk = other.backk;
+       array = other.array;
+
        other.array = nullptr;
        other.capacity = 0;
        other.currsize = 0;
@@ -73,6 +91,7 @@ public:
        currsize = rhs.currsize;
        frontt = rhs.frontt;
        backk = rhs.backk;
+
        rhs.array = nullptr;
        rhs.capacity = 0;
        rhs.currsize = 0;
