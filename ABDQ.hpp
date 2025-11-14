@@ -73,7 +73,7 @@ public:
    ~ABDQ() noexcept {
    delete[] array;
    array = nullptr;
-   
+
    }
     // Insertion
     void pushFront(const T& item) override{
@@ -162,7 +162,7 @@ public:
         if(currsize ==0){
             throw std::runtime_error("Empty");
         }
-        return array[currsize];
+        return array[currsize - 1];
     }
 
     // Getters
