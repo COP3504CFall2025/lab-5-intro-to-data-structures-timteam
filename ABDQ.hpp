@@ -11,23 +11,25 @@ private:
     T* array;                 // underlying dynamic array
     std::size_t capacity;    // total allocated capacity
     std::size_t currsize;        // number of stored elements
-    //std::size_t front;       // index of front element
-    //std::size_t back;        // index after the last element (circular)
+    std::size_t frontt;       // index of front element
+    std::size_t backk;        // index after the last element (circular)
 
     static constexpr std::size_t scaleFactor = 2;
 
 public:
     // Big 5
     ABDQ()
-    : capacity(1), currsize(0), array(new T[capacity]){}
+    : capacity(1), currsize(0), array(new T[capacity]), frontt(0),backk(1){}
 
     explicit ABDQ(std::size_t capacity)
-    : capacity(capacity), currsize(0),  array(new T[capacity]){}
+    : capacity(capacity), currsize(0),  array(new T[capacity]),frontt(0), backk(currsize-1){}
 
    ABDQ(const ABDQ& other)
    {
         capacity = other.capacity;
         currsize = other.currsize;
+        frontt = other.frontt;
+        backk = other.backk;
         array = new T[other.capacity];
         for(size_t i = 0; i < currsize; i++){
         array[i] = other.array[i];
@@ -42,6 +44,8 @@ public:
        delete[] array;
        capacity = rhs.capacity;
        currsize = rhs.currsize;
+       frontt = rhs.frontt;
+       backk = rhs.backk;
        array = new T[rhs.capacity];
        for(size_t i = 0; i < currsize; i++) {
            array[i] = rhs.array[i];
@@ -55,6 +59,8 @@ public:
        other.array = nullptr;
        other.capacity = 0;
        other.currsize = 0;
+       other.frontt = 0;
+       other.backk = 0;
    }
 
    ABDQ& operator=(ABDQ&& rhs) noexcept {
@@ -65,9 +71,13 @@ public:
        array = rhs.array;
        capacity = rhs.capacity;
        currsize = rhs.currsize;
+       frontt = rhs.frontt;
+       backk = rhs.backk;
        rhs.array = nullptr;
        rhs.capacity = 0;
        rhs.currsize = 0;
+       rhs.backk = 0;
+       rhs.frontt = 0;
        return *this;
    }
 
@@ -76,6 +86,8 @@ public:
    array = nullptr;
     capacity = 0;
     currsize = 0;
+    frontt = 0;
+    backk = 0;
    }
     // Insertion
     void pushFront(const T& item) override{
