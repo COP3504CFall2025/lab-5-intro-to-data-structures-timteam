@@ -92,9 +92,8 @@ public:
             capacity = newCap;
         }
 
-        for(size_t i = 0; i < capacity; i++){
-        
-            array[i + 1] = array[i];
+        for(int i = currsize - 1; i >= 0; i--){
+            array[i +1 ] = array[i];
         }
 
         array[0] = item;
@@ -147,9 +146,9 @@ public:
             throw std::runtime_error("Empty array");
         }
 
-	    currsize--;
-
 	    T value = array[currsize - 1];
+
+         currsize--;
 
 	    if(currsize <= capacity / 4){
             capacity /= 2;
