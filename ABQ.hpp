@@ -121,15 +121,17 @@ public:
         }
         currsize--;
 
-        if(currsize > 0 && currsize == capacity / 2) {
+        if(currsize > 0 && currsize < capacity / 4 && capacity > 1) {
             size_t newCap = capacity / 2;
             if(newCap < 1){
             newCap = 1;
             }
             T* newArray = new T[newCap];
+
             for(size_t i = 0; i < currsize; i++) {
                 newArray[i] = array[i];
             }
+
             delete[] array;
             array = newArray;
             capacity = newCap;

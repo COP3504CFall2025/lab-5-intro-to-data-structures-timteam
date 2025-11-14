@@ -127,19 +127,23 @@ public:
 	currsize--;
 	T value = arr[currsize];
 
-		if(currsize > 0 && currsize <= capacity/4 && capacity > 1){
-		size_t newCap = capacity/2;
-		T* newArr = new T[newCap];
+		if(currsize > 0 && currsize < capacity / 4 && capacity > 1){
+            size_t newCap = capacity / 2;
+            if(newCap < 1){
+             newCap = 1;
+              }
 
-			for(size_t i = 0; i < currsize; i++){
-				newArr[i] = arr[i];
-			}
+        T* newArr = new T[newCap];
 
-		delete[] arr;
-		arr = newArr;
-		capacity = newCap;
+        for(size_t i = 0; i < currsize; i++){
+            newArr[i] = arr[i];
+        }
 
-		}
+        delete[] arr;
+        arr = newArr;
+        capacity = newCap;
+    }
+
 		return value;
 	}
 	throw std::runtime_error("Empty array");
