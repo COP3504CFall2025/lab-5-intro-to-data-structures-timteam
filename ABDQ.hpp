@@ -72,6 +72,8 @@ public:
 
    ~ABDQ() noexcept {
    delete[] array;
+   array = nullptr;
+   
    }
     // Insertion
     void pushFront(const T& item) override{
@@ -118,50 +120,48 @@ public:
     
     // Deletion
     T popFront() override{
-    if(currsize == 0){
-    throw std::runtime_error("Empty array");
-    }
-	for(size_t i = 1; i < currsize; i++){
-    size_t temp = array[i];
-    array[i-1] = array[i];
-	}
-	currsize--;
 
-    }
-    T popBack() override{
-	if(currsize == 0){
-    throw std::runtime_error("Empty array");
-    }
-
-	currsize--;
-
-	T value = array[currsize];
-
-		if(currsize <= capacity / 4){
-            size_t newCap = capacity / 2;
-            if(newCap < 1){
-             newCap = 1;
-              }
-
-        T* newArr = new T[newCap];
-
-        for(size_t i = 0; i < currsize; i++){
-            newArr[i] = array[i];
+        if(currsize == 0){
+            throw std::runtime_error("Empty array");
         }
 
-        delete[] array;
-        array = newArr;
-        capacity = newCap;
-    }
+	    for(size_t i = 1; i < currsize; i++){
+            array[i-1] = array[i];
+	    }
+	    currsize--;
 
-		return value;
-	}
+         if(currsize <= capacity / 4){
+            capacity /= 2;
+        }
+        }
+
+    T popBack() override{
+	    if(currsize == 0){
+            throw std::runtime_error("Empty array");
+        }
+
+	    currsize--;
+
+	    T value = array[currsize];
+
+	    if(currsize <= capacity / 4){
+            capacity /= 2;
+        }
+
+	    return value;
+    }
 
     // Access
     const T& front() const override{
+        if(currsize ==0){
+            throw std::runtime_error("Empty");
+        }
         return array[0];
     }
     const T& back() const override{
+        if(currsize ==0){
+            throw std::runtime_error("Empty");
+        }
         return array[currsize];
     }
 
