@@ -46,9 +46,7 @@ public:
        for(size_t i = 0; i < currsize; i++) {
            array[i] = rhs.array[i];
        }
-       rhs.array = nullptr;
-       rhs.capacity = 0;
-       rhs.currsize = 0;
+       
        return *this;
    }
 
