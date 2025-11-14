@@ -127,7 +127,7 @@ public:
 	currsize--;
 	T value = arr[currsize];
 
-		if(currsize > 0 && currsize <= capacity/4 && capactiy > 1){
+		if(currsize > 0 && currsize <= capacity/4 && capacity > 1){
 		size_t newCap = capacity/2;
 		T* newArr = new T[newCap];
 
