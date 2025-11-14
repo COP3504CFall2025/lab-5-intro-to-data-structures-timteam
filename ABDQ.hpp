@@ -1,4 +1,4 @@
-#pragma once
+
 
 #include <cstddef>
 #include <stdexcept>
@@ -11,19 +11,23 @@ private:
     T* array;                 // underlying dynamic array
     std::size_t capacity;    // total allocated capacity
     std::size_t currsize;        // number of stored elements
-    std::size_t front;       // index of front element
-    std::size_t back;        // index after the last element (circular)
+    //std::size_t front;       // index of front element
+    //std::size_t back;        // index after the last element (circular)
 
     static constexpr std::size_t scaleFactor = 2;
 
 public:
     // Big 5
     ABDQ()
-    : capacity(1), currsize(0), front(0), back(0), data(new T[0]){}
-    explicit ABDQ(std::size_t capacity)
-    : capacity(capacity), currsize(0), front(0), back(capacity-1), array(new T[capacity]{}
+    : capacity(1), currsize(0), array(new T[0]){}
 
-   ABDQ(const ABDQ& other):capacity(other.capacity), currsize(other.currsize){
+    explicit ABDQ(std::size_t capacity)
+    : capacity(capacity), currsize(0),  array(new T[capacity]){}
+
+   ABDQ(const ABDQ& other)
+   {
+    capacity = other.capacity;
+    currsize = other.currsize;
    array = new T[capacity];
        for(size_t i = 0; i < currsize; i++){
        array[i] = other.array[i];
@@ -89,10 +93,10 @@ public:
         array[i + 1] = array[i];
         }
 
-        arr[0] = data;
+        array[0] = item;
          currsize++;
         }
-    }
+    
 
     void pushBack(const T& item) override{
     if(currsize >= capacity){
@@ -108,18 +112,18 @@ public:
         capacity = newCap;
     }
 
-    arr[currsize] = data;
+    array[currsize] = item;
     currsize++;
 }
-    }
-
+    
     // Deletion
     T popFront() override{
     if(currsize == 0){
     throw std::runtime_error("Empty array");
     }
-	for(size_t i = 0; i < currsize; i++){
-
+	for(size_t i = 1; i < currsize; i++){
+    size_t temp = array[i];
+    array[i-1] = array[i];
 	}
 	currsize--;
 
@@ -130,16 +134,41 @@ public:
     }
 
 	currsize--;
+
+	T value = array[currsize];
+
+		if(currsize <= capacity / 4){
+            size_t newCap = capacity / 2;
+            if(newCap < 1){
+             newCap = 1;
+              }
+
+        T* newArr = new T[newCap];
+
+        for(size_t i = 0; i < currsize; i++){
+            newArr[i] = array[i];
+        }
+
+        delete[] array;
+        array = newArr;
+        capacity = newCap;
     }
 
+		return value;
+	}
+
     // Access
-    const T& front() const override;
-    const T& back() const override;
+    const T& front() const override{
+        return array[0];
+    }
+    const T& back() const override{
+        return array[currsize];
+    }
 
     // Getters
     std::size_t getSize() const noexcept override{
     return currsize;
     }
 
-
+    
 };
