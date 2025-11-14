@@ -19,19 +19,19 @@ private:
 public:
     // Big 5
     ABDQ()
-    : capacity(1), currsize(0), array(new T[0]){}
+    : capacity(1), currsize(0), array(new T[capacity]){}
 
     explicit ABDQ(std::size_t capacity)
     : capacity(capacity), currsize(0),  array(new T[capacity]){}
 
    ABDQ(const ABDQ& other)
    {
-    capacity = other.capacity;
-    currsize = other.currsize;
-   array = new T[capacity];
-       for(size_t i = 0; i < currsize; i++){
-       array[i] = other.array[i];
-       }
+        capacity = other.capacity;
+        currsize = other.currsize;
+        array = new T[other.capacity];
+        for(size_t i = 0; i < currsize; i++){
+        array[i] = other.array[i];
+        }
    }
 
 
