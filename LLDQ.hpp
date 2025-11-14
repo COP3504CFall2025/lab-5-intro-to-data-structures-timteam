@@ -51,7 +51,7 @@ public:
         return list.getHead()->data;
     }
     const T& back() const override{
-        return list.getTalk()->data;
+        return list.getTail()->data;
     }
 
     // Getter
