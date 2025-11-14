@@ -29,7 +29,7 @@ public:
 
     explicit ABDQ(std::size_t capacity)
     {
-        capacity = capacity;
+        this->capacity = capacity;
         currsize = 0;
         frontt = 0;
         array = new T[capacity];

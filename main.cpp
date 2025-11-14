@@ -20,7 +20,10 @@
 
 int main() {
 
-
+    ADBQ<int> x;
+    x.pushFront(5);
+    x.popFront();
+    
 
     return 0;
 }
