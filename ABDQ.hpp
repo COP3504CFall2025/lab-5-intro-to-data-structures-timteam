@@ -42,7 +42,7 @@ public:
        delete[] array;
        capacity = rhs.capacity;
        currsize = rhs.currsize;
-       array = new T[capacity];
+       array = new T[rhs.capacity];
        for(size_t i = 0; i < currsize; i++) {
            array[i] = rhs.array[i];
        }
@@ -93,8 +93,8 @@ public:
         }
 
         for(size_t i = 0; i < capacity; i++){
-        T temp = array[i];
-        array[i + 1] = array[i];
+        
+            array[i + 1] = array[i];
         }
 
         array[0] = item;
@@ -127,6 +127,7 @@ public:
         if(currsize == 0){
             throw std::runtime_error("Empty array");
         }
+        T temp = array[0];
 
 	    for(size_t i = 1; i < currsize; i++){
             array[i-1] = array[i];
@@ -136,6 +137,9 @@ public:
          if(currsize <= capacity / 4){
             capacity /= 2;
         }
+
+        return temp;
+
         }
 
     T popBack() override{
@@ -145,7 +149,7 @@ public:
 
 	    currsize--;
 
-	    T value = array[currsize];
+	    T value = array[currsize - 1];
 
 	    if(currsize <= capacity / 4){
             capacity /= 2;
