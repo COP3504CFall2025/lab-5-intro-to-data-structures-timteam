@@ -19,7 +19,9 @@ private:
 public:
     // Big 5
     ABDQ();
-    explicit ABDQ(std::size_t capacity);
+    explicit ABDQ(std::size_t capacity){
+
+}
     ABDQ(const ABDQ& other);
     ABDQ(ABDQ&& other) noexcept;
     ABDQ& operator=(const ABDQ& other);

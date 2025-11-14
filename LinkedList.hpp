@@ -8,7 +8,9 @@ template <typename T>
 class LinkedList {
 public:
 	// Behaviors
-	void printForward() const;
+	void printForward() const{
+
+	}
 	void printReverse() const;
 
 	// Accessors
